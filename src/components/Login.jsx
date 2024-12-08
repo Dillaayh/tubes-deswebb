@@ -17,9 +17,15 @@ function Login() {
     if (!email || !password) {
       setError('Data belum lengkap! Mohon isi email dan password.');
     } else {
-      setError('');
-      // Lakukan proses login atau arahkan ke dashboard
-      window.location.href = '/Dashboard'; // Ganti dengan URL tujuan yang sesuai
+      // Ambil data dari Local Storage
+      const storedData = JSON.parse(localStorage.getItem('userData'));
+  
+      if (storedData && storedData.email === email && storedData.password === password) {
+        setError('');
+        window.location.href = '/Dashboard'; // Arahkan ke halaman Dashboard
+      } else {
+        setError('Email atau password salah!');
+      }
     }
   };
 
@@ -46,7 +52,7 @@ function Login() {
             <input
               type="email"
               id="email"
-              className="w-full p-3 rounded-lg bg-[#95D2B3] border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full p-3 rounded-lg bg-green-custom border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)} // Mengatur state email
@@ -60,7 +66,7 @@ function Login() {
               <input
                 type={showPassword ? 'text' : 'password'} // Mengubah tipe input berdasarkan state
                 id="password"
-                className="w-full p-3 rounded-lg bg-[#95D2B3] border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full p-3 rounded-lg bg-green-custom border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} // Mengatur state password

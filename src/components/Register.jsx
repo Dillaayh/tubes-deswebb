@@ -23,11 +23,25 @@ function Register() {
       setErrorMessage('Password dan konfirmasi password tidak cocok.');
     } else {
       setErrorMessage(''); // Reset pesan error jika data valid
-      // Proses pendaftaran di sini
-       // Lakukan proses login atau arahkan ke dashboard
-       window.location.href = '/Dashboard';
+  
+      const email = document.getElementById('email').value;
+  
+      // Simpan data pengguna ke localStorage
+      const userData = {
+        firstName: '', // Default kosong karena tidak ada input nama di halaman Register
+        lastName: '',  // Default kosong
+        email: email,
+        password: password,
+        profileImage: null, // Default gambar kosong
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+  
+      // Arahkan pengguna ke halaman login
+      alert('Pendaftaran berhasil. Silakan login.');
+      window.location.href = '/Login';
     }
   };
+  
 
   return (
     <div className="flex items-start justify-center min-h-screen bg-teal-500 py-32 px-10">
@@ -51,7 +65,7 @@ function Register() {
             <input
               type="email"
               id="email"
-              className="w-full p-3 rounded-lg bg-[#95D2B3] border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full p-3 rounded-lg bg-green-custom' border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
               placeholder="Email"
             />
           </div>
@@ -65,7 +79,7 @@ function Register() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                className="w-full p-3 rounded-lg bg-[#95D2B3] border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full p-3 rounded-lg bg-green-custom' border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} // Menyimpan nilai password
@@ -92,7 +106,7 @@ function Register() {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
-                className="w-full p-3 rounded-lg bg-[#95D2B3] border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full p-3 rounded-lg bg-green-custom' border border-green-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="Konfirmasi Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)} // Menyimpan nilai konfirmasi password
